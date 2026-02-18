@@ -38,33 +38,29 @@ const server = http.createServer(app);
 /* ================= MIDDLEWARE ================= */
 app.use(
   cors({
-    origin: [
-  "http://localhost:5173",
-  "http://localhost:3000",
-  "https://your-netlify-app.netlify.app"
-],
-
-  
+    origin: true, // reflect request origin
     credentials: true,
   })
 );
+
+
+
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 /* ================= SOCKET.IO ================= */
+
 const io = new Server(server, {
   cors: {
-    origin: [
-      "http://localhost:5173",
-      "http://localhost:3000",
-      "https://venerable-semifreddo-326656.netlify.app"
-    ],
-    methods: ["GET", "POST"],
+    origin: true,
     credentials: true,
+    methods: ["GET", "POST"],
   },
 });
+
 
 
 initSocket(io);
