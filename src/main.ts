@@ -38,8 +38,8 @@ const server = http.createServer(app);
 /* ================= MIDDLEWARE ================= */
 app.use(
   cors({
-    origin: true, // reflect request origin
-    credentials: true,
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   })
 );
 
@@ -55,12 +55,10 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 const io = new Server(server, {
   cors: {
-    origin: true,
-    credentials: true,
+    origin: "*",
     methods: ["GET", "POST"],
   },
 });
-
 
 
 initSocket(io);
