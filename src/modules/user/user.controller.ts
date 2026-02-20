@@ -94,10 +94,10 @@ export async function getUserProfile(req: Request, res: Response) {
       throw error;
     }
 
-    if (!data) {
-      console.log("⚠️ User not found:", username);
-      return res.status(404).json({ error: "User not found" });
-    }
+   if (!data) {
+  console.log("⚠️ User not found:", username);
+  return res.json(null); // return 200 instead of 404
+}
 
     console.log("✅ User found:", data.username);
     res.json(data);
