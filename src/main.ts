@@ -15,6 +15,8 @@ import { initSocket } from "./socket";
 import { AppDataSource } from "./config/data-source";
 import { pool } from "./db";
 
+import proxyRoutes from "./modules/chat/proxy.route";
+
 // Import calendar route
 
 // Import chat routes (with error handling)
@@ -45,6 +47,7 @@ app.use(
 
 
 
+app.use("/api/v1", proxyRoutes);
 
 
 app.use(express.json());
