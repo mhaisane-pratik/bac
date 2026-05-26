@@ -16,6 +16,7 @@ import { AppDataSource } from "./config/data-source";
 import { pool } from "./db";
 
 import proxyRoutes from "./modules/chat/proxy.route";
+import ssoAuthRoutes from "./modules/auth/auth.sso";
 
 // Import calendar route
 
@@ -134,6 +135,9 @@ if (messageRoutes) {
 // Calendar routes
 console.log("✅ Calendar routes registered at /api/v1/calendar");
 
+app.use("/api/v1/auth", ssoAuthRoutes);
+console.log("SSO routes mounted at /api/v1/auth");
+
 /* ================= 404 HANDLER ================= */
 app.use((req, res) => {
   res.status(404).json({
@@ -143,6 +147,8 @@ app.use((req, res) => {
       "GET /",
       "GET /health",
       "GET /db-test",
+      "POST /api/v1/auth/sso-token",
+      "POST /api/v1/auth/sso-login",
       "POST /api/v1/users",
       "GET /api/v1/users/:username",
       "GET /api/v1/chats/rooms/:username",
